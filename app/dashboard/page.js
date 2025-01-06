@@ -1,4 +1,4 @@
-import Dashboard from "@/components/dashboard"
+import Dashboard from "@/components/Dashboard"
 import Login from "@/components/Login"
 import Main from "@/components/Main"
 
