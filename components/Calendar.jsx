@@ -1,22 +1,23 @@
 import React from 'react'
 import { gradients, baseRating, demoData } from '@/utils'
 
-
+// Created array to check against for dynamic calendar creation as per day on first date of the month.
 const months = { 'January': 'Jan', 'February': 'Feb', 'March': 'Mar', 'April': 'Apr', 'May': 'May', 'June': 'Jun', 'July': 'Jul', 'August': 'Aug', 'September': 'Sep', 'October': 'Oct', 'November': 'Nov', 'December': 'Dec' }
 const now = new Date()
 const dayList = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-console.log(dayList)
 export default function Calendar(props) {
     const { demo } = props
     // Artificially constructed a year to start off to switch between months
     const year = 2025
-    const month = 'September'
-    // Create a new date object for that year, that specific month, and then the next line will figure out the first day of that month.
+    const month = 'January'
+    
+    // Create a new date object for that year, that specific month, and then the next line will figure out the first day of that month, and following that is the number of days in th emonth.
     const monthNow = new Date(year, Object.keys(months).indexOf(month), 1)
     const firstDayOfMonth = monthNow.getDay()
     const daysInMonth = new Date(year, Object.keys(month).indexOf(month) + 1, 0).getDate()
 
+    // Calendar display logic
     const daysToDisplay = firstDayOfMonth + daysInMonth
     const numRows = (Math.floor(daysToDisplay / 7)) + (daysToDisplay % 7 ? 1 : 0)
 
