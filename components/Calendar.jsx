@@ -46,7 +46,7 @@ export default function Calendar(props) {
                                     'white'
 
                             return (
-                                <div style={{background: color}} className={'text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 py-4 justify-between rounded-lg ' + (isToday ? ' border-green-500' : 'border-green-100') + (color === 'white' ? ' text-green-500' : ' text-white')} key={dayOfWeekIndex}>
+                                <div style={{background: color}} className={'text-xs sm:text-sm border border-solid p-2 flex items-center gap-2 py-4 sm:py-6 justify-between rounded-lg font-semibold ' + (isToday ? ' border-green-500' : 'border-green-100') + (color === 'white' ? ' text-green-500' : ' text-white')} key={dayOfWeekIndex}>
                                     <p>{dayIndex}</p>
                                 </div>
                             )
