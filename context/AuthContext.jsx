@@ -1,7 +1,7 @@
 'use client'
 import { auth, db } from "@/firebase"
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth"
-import { getDoc } from "firebase/firestore"
+import { doc, getDoc } from "firebase/firestore"
 import React, { useContext, useState, useEffect } from "react"
 
 
@@ -15,7 +15,7 @@ export function useAuth() {
 // Wrapper function to wrap our entire application (either in Authorised state or Not Authorised state). Children get parsed in as props - where the children will be the whole app - so AuthContext can be accessed globally.
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState(null)
-    const [userDataObj, setUserDataObj] = useState({})
+    const [userDataObj, setUserDataObj] = useState(null)
     const [loading, setLoading] = useState(true)
 
     // Auth Handlers
@@ -39,17 +39,20 @@ export function AuthProvider({ children }) {
                 // Set the user to our local context state
                 setLoading(true)
                 setCurrentUser(user)
-                if (!user) {return}
+                if (!user) {
+                    console.log('No user found!')
+                    return
+                }
                 console.log('Fetching user data!')
                 // if user exists, fetch data from firestore db
-                const docRef= doc(db, 'users',user.uid)
+                const docRef = doc(db, 'users', user.uid)
                 const docSnap = await getDoc(docRef)
                 let firebaseData = {}
                 // fetch document only if it exists
-                if(docSnap.exists()) {
+                if (docSnap.exists()) {
                     console.log('Found user data!')
-                    firebaseData=docSnap.data()
-                    console.log('firebaseData')
+                    firebaseData = docSnap.data()
+                    console.log(firebaseData)
                 }
                 setUserDataObj(firebaseData)
             } catch (err) {
@@ -65,10 +68,11 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser,
         userDataObj,
+        setUserDataObj,
         signup,
         logout,
-        login ,
-        loading  
+        login,
+        loading
     }
 
     return (
