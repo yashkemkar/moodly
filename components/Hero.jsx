@@ -1,8 +1,7 @@
 import React from 'react'
 import { Fugaz_One } from "next/font/google"
-import Button from './Button'
 import Calendar from './Calendar'
-import Link from 'next/link'
+import CallToAction from './CallToAction'
 
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ['400'] })
 
@@ -17,14 +16,7 @@ export default function Hero() {
           Create your mood record and see how you feel on <span className='font-semibold'>every day of every year.</span>
         </p>
       </div>
-      <div className='grid grid-cols-2 gap-4 w-fit mx-auto'>
-        <Link href={'/dashboard'}>
-          <Button text="Sign Up" />
-        </Link>
-        <Link href={'/dashboard'}>
-          <Button text="Login" dark />
-        </Link>
-      </div>
+      <CallToAction />
       <Calendar demo />
     </div>
   )

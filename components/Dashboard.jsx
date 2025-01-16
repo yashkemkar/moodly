@@ -15,8 +15,34 @@ export default function Dashboard() {
   const [data, setData] = useState({})
   const now = new Date()
 
+  // function to return statistics to the stats bar
   function countValues() {
+    let total_number_of_days = 0
+    let sum_moods = 0
 
+    for (let year in data) {
+      for (let month in data[year]) {
+        for (let day in data[year][month]) {
+          let days_mood = data[year][month][day]
+          total_number_of_days++
+          sum_moods += days_mood
+        }
+      }
+    }
+    return { number_of_days: total_number_of_days, average_mood: sum_moods / total_number_of_days }
+  }
+
+  const statuses = {
+    ...countValues(),
+    time_remaining: `${23 - now.getHours()}H ${60 - now.getMinutes()}M`
+  }
+
+  const moods = {
+    'Barely Alive': '😭',
+    'Sad': '😓',
+    'Existing': '😐',
+    'Good': '😊',
+    'Thriving': '😍',
   }
 
   // setting mood function checks if year, month exists, if so sets mood. Also changes the state of data, userDataObj and writes to firebase database.
@@ -54,20 +80,6 @@ export default function Dashboard() {
 
   }
 
-  const statuses = {
-    num_days: 14,
-    time_remaining: '13:14:26',
-    date: (new Date()).toDateString()
-  }
-
-  const moods = {
-    'Barely Alive': '😭',
-    'Sad': '😓',
-    'Existing': '😐',
-    'Good': '😊',
-    'Thriving': '😍',
-  }
-
   // on mount check if there is a user or there is an object to load (relating to this user). Depends on both those things being there
   useEffect(() => {
     if (!currentUser || !userDataObj) {
@@ -82,7 +94,7 @@ export default function Dashboard() {
     return <Loading />
   }
 
-// current user guard clause
+  // current user guard clause
   if (!currentUser) {
     return <Login />
   }
@@ -93,8 +105,8 @@ export default function Dashboard() {
         {Object.keys(statuses).map((status, statusIndex) => {
           return (
             <div key={statusIndex} className='flex flex-col gap-1 sm:gap-2' >
-              <p className='font-medium uppercase text-xs sm:text-sm truncate '>{status.replaceAll('_', ' ')}</p>
-              <p className={'text-base sm:text-lg truncate ' + fugaz.className}>{statuses[status]}</p>
+              <p className='font-medium capitalize text-xs sm:text-sm truncate '>{status.replaceAll('_', ' ')}</p>
+              <p className={'text-base sm:text-lg ' + fugaz.className}>{statuses[status]}{status ==='number_of_days' ? ' 🔥': ' '}</p>
             </div>
           )
         })}

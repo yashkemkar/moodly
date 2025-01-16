@@ -3,10 +3,10 @@ import "./globals.css"
 import Link from "next/link"
 import { AuthProvider } from "@/context/AuthContext"
 import Head from "./head"
+import Logout from './../components/Logout';
 
 const opensans = Open_Sans({ subsets: ["latin"] })
 const fugaz = Fugaz_One({ subsets: ["latin"], weight: ['400'] })
-
 
 export const metadata = {
     title: "Moodly",
@@ -20,9 +20,7 @@ export default function RootLayout({ children }) {
             <Link href={'/'}>
                 <h1 className={'text-xl sm:text-3xl textGradient ' + fugaz.className}>Moodly</h1>
             </Link>
-            <div className="flex items-center justify-between">
-                PLACEHOLDER CTA || STATS
-            </div>
+            <Logout />
         </header>
     )
 
@@ -33,7 +31,7 @@ export default function RootLayout({ children }) {
     )
     return (
         <html lang="en">
-            <Head/>
+            <Head />
             <AuthProvider>
                 <body className={'w-full max-w-[1000px] mx-auto text-sm sm:text-base min-h-screen flex flex-col text-slate-800 ' + opensans.className}>
                     {header}
