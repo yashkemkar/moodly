@@ -29,7 +29,7 @@ export default function Dashboard() {
         }
       }
     }
-    return { number_of_days: total_number_of_days, average_mood: sum_moods / total_number_of_days }
+    return { number_of_days: total_number_of_days, average_mood: (sum_moods / total_number_of_days).toFixed(1) }
   }
 
   const statuses = {
@@ -106,7 +106,7 @@ export default function Dashboard() {
           return (
             <div key={statusIndex} className='flex flex-col gap-1 sm:gap-2' >
               <p className='font-medium capitalize text-xs sm:text-sm truncate '>{status.replaceAll('_', ' ')}</p>
-              <p className={'text-base sm:text-lg ' + fugaz.className}>{statuses[status]}{status ==='number_of_days' ? ' 🔥': ' '}</p>
+              <p className={'text-base sm:text-lg ' + fugaz.className}>{statuses[status]}{status ==='number_of_days' ? '  🔥': ' '}</p>
             </div>
           )
         })}
