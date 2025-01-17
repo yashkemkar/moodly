@@ -27,6 +27,7 @@ export default function RootLayout({ children }) {
     const footer = (
         <footer className="p-4 sm:p-8 place-items-center">
             <p className={'text-green-500 ' + fugaz.className}>Created with 💚</p>
+            <p className="text-xs py-2">This App has been created by <span className="text-green-500 underline font-semibold"><Link href='https://yash-kemkar-web-portfolio.netlify.app/'>Yash Kemkar</Link></span> using Next.js, Tailwind CSS & Firebase.</p>
         </footer>
     )
     return (

@@ -19,10 +19,9 @@ export default function CallToAction() {
         )
     }
 
-
     return (
         <div className='grid grid-cols-2 gap-4 w-fit mx-auto'>
-            <Link href={'/dashboard'}>
+            <Link href={'/dashboard?isRegistering=true'}>
                 <Button text="Sign Up" />
             </Link>
             <Link href={'/dashboard'}>

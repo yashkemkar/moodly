@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Button from './Button'
 import { usePathname} from 'next/navigation'
 
+
 export default function Logout() {
     const { currentUser, logout } = useAuth()
     const pathname = usePathname()
