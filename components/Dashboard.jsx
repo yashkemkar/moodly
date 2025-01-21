@@ -74,6 +74,7 @@ export default function Dashboard() {
           }
         }
       }, { merge: true })
+      window.alert('Mood has been logged for the day. Come back tomorrow!')
     } catch (err) {
       console.log('Failed to set data: ', err.message)
     }
